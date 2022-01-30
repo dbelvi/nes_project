@@ -115,9 +115,9 @@ static void sendDATA(int dest, char payload){
     if(!next_hop || next_hop == 0){
     	//if a node was not reachable, it might occur that a RERR caused the routing table to change and the next hop is not valid anymore
     	printf("Oh. Our previous route is not valid anymore...I need to find a new route...\n");
-    	store_data(randomDestinationAddress,payload); //store the data, until we found a new route
+    	store_data(dest,payload); //store the data, until we found a new route
 		own_sequence++; //increase seq before we send the rreq
-		int lastDestSeq = routingTable[randomDestinationAddress-1].seq; //we use the last known seq to make sure we are not receiving any old routes from intermediate nodes
+		int lastDestSeq = routingTable[dest-1].seq; //we use the last known seq to make sure we are not receiving any old routes from intermediate nodes
 		
     } else {
     	//the next hop is valid.. continue 
